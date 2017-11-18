@@ -66,3 +66,30 @@ Speaking of which, you should go ahead and create a superuser using the command 
 You may now serve NightShade using anyway you would like. Nginx and gunicorn is how I serve it, but other ways should work just as well.
 
 If you run into problems, please report them. This is a new project and things may be horrible wrong. Pull requests are always welcome as well.
+
+
+
+**UPDATE**
+*DROP DATABASE
+*install requirements
+*python manage.py migrate_schemas --shared
+*pip install Django==1.8
+*python manage.py migrate_schemas --shared
+*python manage.py migrate_schemas
+*pip install -r requirements.txt
+*python manage.py migrate_schemas --shared
+*python manage.py migrate_schemas
+*python manage.py shell
+
+from customers.models import Client
+
+# create your first real tenant
+tenant = Client(domain_url='192.168.56.100', # don't add your port or www here or things will break.
+                schema_name='shortname',
+                name='DTLLbrexamcic')
+
+tenant.save() # migrate_schemas automatically called, your tenant is ready to be used!
+
+*python manage.py tenant_command createsuperuser
+
+*uwsgi --socket :8001 --wsgi-file NightShade/wsgi.py &
