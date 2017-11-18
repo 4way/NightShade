@@ -69,27 +69,27 @@ If you run into problems, please report them. This is a new project and things m
 
 
 
-**UPDATE**
-*DROP DATABASE
-*install requirements
-*python manage.py migrate_schemas --shared
-*pip install Django==1.8
-*python manage.py migrate_schemas --shared
-*python manage.py migrate_schemas
-*pip install -r requirements.txt
-*python manage.py migrate_schemas --shared
-*python manage.py migrate_schemas
-*python manage.py shell
+**UPDATE INSTALL ORDER FOR CURRENT VERSION**
+DROP THE DATABASE NIGHTSHADE
 
-from customers.models import Client
+    install requirements
+    python manage.py migrate_schemas --shared
+    pip install Django==1.8
+    python manage.py migrate_schemas --shared
+    python manage.py migrate_schemas
+    pip install -r requirements.txt
+    python manage.py migrate_schemas --shared
+    python manage.py migrate_schemas
+    python manage.py shell
 
-# create your first real tenant
-tenant = Client(domain_url='192.168.56.100', # don't add your port or www here or things will break.
-                schema_name='shortname',
-                name='DTLLbrexamcic')
+    from customers.models import Client
 
-tenant.save() # migrate_schemas automatically called, your tenant is ready to be used!
+    tenant = Client(domain_url='192.168.56.100', # don't add your port or www here or things will break.
+                    schema_name='shortname',
+                    name='DTLLbrexamcic')
 
-*python manage.py tenant_command createsuperuser
+    tenant.save() # migrate_schemas automatically called, your tenant is ready to be used!
 
-*uwsgi --socket :8001 --wsgi-file NightShade/wsgi.py &
+    python manage.py tenant_command createsuperuser
+
+    uwsgi --socket :8001 --wsgi-file NightShade/wsgi.py &
